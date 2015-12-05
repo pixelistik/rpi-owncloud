@@ -45,11 +45,6 @@ RUN curl -fsSL -o owncloud.tar.bz2 \
 RUN chown -R www-data:www-data /var/www
 
 WORKDIR /var/www
-USER www-data
-
-RUN php occ maintenance:install
-RUN php occ app:enable contacts
-RUN php occ app:enable calendar
 
 COPY config.php /var/www/config/config.php
 RUN chmod -R 777 /var/www/config
