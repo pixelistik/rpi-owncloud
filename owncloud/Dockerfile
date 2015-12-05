@@ -39,8 +39,7 @@ RUN curl -fsSL -o owncloud.tar.bz2 \
 	&& curl -fsSL -o owncloud.tar.bz2.asc \
 		"https://download.owncloud.org/community/owncloud-${OWNCLOUD_VERSION}.tar.bz2.asc" \
 	&& gpg --verify owncloud.tar.bz2.asc \
-		&& tar -xjf owncloud.tar.bz2 -C /var/ \
-		&& mv /var/owncloud/* /var/www \
+		&& tar --strip-components=1 -xjf owncloud.tar.bz2 -C /var/www/ \
 		&& rm owncloud.tar.bz2 owncloud.tar.bz2.asc
 
 RUN chown -R www-data:www-data /var/www
