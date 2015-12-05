@@ -52,6 +52,9 @@ RUN php occ app:enable contacts
 RUN php occ app:enable calendar
 
 COPY config.php /var/www/config/config.php
+RUN chmod -R 777 /var/www/config
+
+RUN chown -R www-data:www-data /var/www
 
 COPY owncloud.conf /etc/apache2/sites-available/owncloud.conf
 RUN a2dissite 000-default \
