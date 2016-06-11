@@ -27,7 +27,7 @@ RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys E3036906AD9F30807351F
 
 RUN mkdir -p /etc/apache2/logs
 
-ENV OWNCLOUD_VERSION=8.1.3 \
+ENV OWNCLOUD_VERSION=8.1.8 \
     APACHE_RUN_USER=www-data \
     APACHE_RUN_GROUP=www-data \
     APACHE_LOG_DIR=logs \
@@ -39,8 +39,8 @@ RUN curl -fsSL -o owncloud.tar.bz2 \
 	&& curl -fsSL -o owncloud.tar.bz2.asc \
 		"https://download.owncloud.org/community/owncloud-${OWNCLOUD_VERSION}.tar.bz2.asc" \
 	&& gpg --verify owncloud.tar.bz2.asc \
-		&& tar --strip-components=1 -xjf owncloud.tar.bz2 -C /var/www/ \
-		&& rm owncloud.tar.bz2 owncloud.tar.bz2.asc
+	&& tar --strip-components=1 -xjf owncloud.tar.bz2 -C /var/www/ \
+	&& rm owncloud.tar.bz2 owncloud.tar.bz2.asc
 
 RUN chown -R www-data:www-data /var/www
 
@@ -57,5 +57,9 @@ RUN a2dissite 000-default \
 
 RUN a2enmod rewrite \
 	&& a2enmod headers
+
+USER www-data
+RUN php occ app:enable contacts
+RUN php occ app:enable calendar
 
 ENTRYPOINT ["apache2","-DFOREGROUND"]
