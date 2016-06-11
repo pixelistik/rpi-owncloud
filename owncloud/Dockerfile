@@ -27,7 +27,7 @@ RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys E3036906AD9F30807351F
 
 RUN mkdir -p /etc/apache2/logs
 
-ENV OWNCLOUD_VERSION=8.1.3 \
+ENV OWNCLOUD_VERSION=8.1.8 \
     APACHE_RUN_USER=www-data \
     APACHE_RUN_GROUP=www-data \
     APACHE_LOG_DIR=logs \
