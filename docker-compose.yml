@@ -5,4 +5,4 @@ owncloud:
   ports:
   - "9000:80"
   volumes:
-  - /mnt/verbatim/owncloud-data:/var/www/data
+  - /var/owncloud-data:/var/www/data
